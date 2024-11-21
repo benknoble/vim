@@ -2,7 +2,8 @@ vim9script noclear
 
 # Config {{{1
 
-const SHELL_PROMPT: string = g:
+const SHELL_PROMPT: func(): string = (): string =>
+  g:
     ->get('helptoc', {})
     ->get('shell_prompt', '^\w\+@\w\+:\f\+\$\s')
 
@@ -83,7 +84,7 @@ const MATCH_ENTRY: dict<dict<func: bool>> = {
     },
 
     terminal: {
-        1: (line: string, _): bool => line =~ SHELL_PROMPT,
+        1: (line: string, _): bool => line =~ SHELL_PROMPT(),
     }
 }
 
